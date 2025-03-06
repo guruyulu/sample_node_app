@@ -33,7 +33,7 @@ deployment:
     allowPrivilegeEscalation: false
 
   image:
-    name: "guruyulu/sim"
+    name: "guruyulu/elk-app"
     tag: "latest"
     pullPolicy: "IfNotPresent"
   registry: "docker.io"
