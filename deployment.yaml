@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+  namespace: infra-apps
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+        - name: express-app
+          image: guruyulu/elk-app:latest
+          ports:
+            - containerPort: 3002
+          # env:
+          #   - name: POSTGRES_USER
+          #     value: "guru"
+          #   - name: POSTGRES_HOST
+          #     value: "localhost"
+          #   - name: POSTGRES_DB
+          #     value: "db1"
+          #   - name: REDIS_HOST
+          #     value: "localhost"
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+
+        # - name: redis
+        #   image: redis:latest
+        #   ports:
+        #     - containerPort: 6379
+        #   resources:
+        #     requests:
+        #       memory: "64Mi"
+        #       cpu: "50m"
+        #     limits:
+        #       memory: "128Mi"
+        #       cpu: "200m"
+
+        # - name: postgres
+        #   image: postgres:latest
+        #   env:
+        #     - name: POSTGRES_DB
+        #       value: "db1"
+        #     - name: POSTGRES_USER
+        #       value: "guru"
+        #   ports:
+        #     - containerPort: 5432
+        #   resources:
+        #     requests:
+        #       memory: "256Mi"
+        #       cpu: "200m"
+        #     limits:
+        #       memory: "512Mi"
+        #       cpu: "1"

@@ -1,0 +1,13 @@
+version: '3'
+services:
+  node-app:
+    build: .
+    container_name: node-app
+    ports:
+      - "3002:3002"
+    networks:
+      - elastic
+
+networks:
+  elastic:
+    external: true
