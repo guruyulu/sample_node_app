@@ -102,6 +102,10 @@ app.get('/', async (req, res) => {
   res.send("hello world");
 });
 
+app.get('/health', async (req, res) => {
+  res.send("ok");
+});
+
 // Endpoint to kill the application
 app.get('/kill', (req, res) => {
   res.send("Killing the application...");

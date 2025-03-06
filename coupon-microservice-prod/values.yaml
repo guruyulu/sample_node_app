@@ -75,7 +75,7 @@ deployment:
     enabled: true
     httpGet:
       path: "/health"
-      port: 7333
+      port: 3002
     initialDelaySeconds: 10
     periodSeconds: 10
     timeoutSeconds: 1
@@ -86,7 +86,7 @@ deployment:
     enabled: true
     httpGet:
       path: "/health"
-      port: 7333
+      port: 3002
     initialDelaySeconds: 10
     periodSeconds: 10
     timeoutSeconds: 1
@@ -108,11 +108,11 @@ serviceAccount:
 service:
   enabled: true
   type: NodePort
-  port: 7333
+  port: 3002
   portName: "http"
 
 ports:
-  containerPort: 7333
+  containerPort: 3002
 
 servicemonitor:
   enabled: true
