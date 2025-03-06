@@ -1,0 +1,18 @@
+{{- if .Values.service.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.deployment.applicationName }}
+  namespace: {{ .Values.appNamespace }}
+  labels:
+    app.kubernetes.io/name: {{ .Values.deployment.applicationName }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - name: {{ .Values.service.portName }}
+      port: {{ .Values.service.port }}
+      targetPort: {{ .Values.ports.containerPort }}
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: {{ .Values.deployment.applicationName }}
+{{- end }}

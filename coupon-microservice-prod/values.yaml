@@ -1,0 +1,132 @@
+namespace:
+  name: "infra-apps"
+  labels:
+    admissionWebhooks: "disabled"
+  annotations:
+    linkerdInject: "disabled"
+
+appNamespace: "infra-apps"
+deployment:
+  # serviceAccountName: "yulu-coupon-prod-sa"
+  applicationName:  "coupon-microservice-prod"
+  linkerdEnabled: "disabled"
+  strategy:
+    enabled: true
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxUnavailable: "25%"
+      maxSurge: "25%"
+
+  minReadySeconds: 5
+  revisionHistoryLimit: 10
+  replicaCount: 2
+
+  terminationGracePeriodSeconds: 30
+  podSecurityContext:
+    runAsUser: 1000
+    runAsGroup: 3000
+  hostsfile:
+    enabled: false
+    records: []
+
+  securityContext:
+    allowPrivilegeEscalation: false
+
+  image:
+    name: "guruyulu/sim"
+    tag: "latest"
+    pullPolicy: "IfNotPresent"
+  registry: "docker.io"
+
+  ports:
+    enabled: true
+    containerPort: 80
+
+  hostpathVolume:
+    enabled: false
+    name: "hostpath-volume"
+    mountPath: "/data"
+    type: "Directory"
+
+  volumeMounts:
+    enabled: false
+    volumes: []
+
+  env:
+    enabled: false
+
+  secrets:
+    enabled: false
+    data: []
+
+  configmaps:
+    enabled: false
+
+  resources:
+    enabled: true
+    requests:
+      memory: "512Mi"
+      cpu: "500m"
+    limits:
+      memory: "1024Mi"
+      cpu: "2000m"
+
+  readinessProbe:
+    enabled: true
+    httpGet:
+      path: "/health"
+      port: 7333
+    initialDelaySeconds: 10
+    periodSeconds: 10
+    timeoutSeconds: 1
+    failureThreshold: 3
+    successThreshold: 1
+
+  livenessProbe:
+    enabled: true
+    httpGet:
+      path: "/health"
+      port: 7333
+    initialDelaySeconds: 10
+    periodSeconds: 10
+    timeoutSeconds: 1
+    failureThreshold: 3
+    successThreshold: 1
+
+  imagePullSecrets:
+    enabled: false
+    secretName: "my-registry-secret"
+  nodeSelector: {}
+  affinity: {}
+
+securityPolicy:
+  enabled: false
+
+serviceAccount:
+  enabled: false
+
+service:
+  enabled: true
+  type: NodePort
+  port: 7333
+  portName: "http"
+
+ports:
+  containerPort: 7333
+
+servicemonitor:
+  enabled: true
+  name: "coupon-prod"
+  labels:
+    release: prometheus
+    app: prometheus
+    prometheus: main
+    observability: prod
+  spec:
+    jobLabel: job
+    selectorLabels:
+      app.kubernetes.io/name: "coupon-prod"
+      observability: prod
+    interval: 10s
+    port: 80
+    path: /

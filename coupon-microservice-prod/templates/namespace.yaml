@@ -1,0 +1,8 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: {{ .Values.appNamespace }}
+  labels:
+    config.linkerd.io/admission-webhooks: {{ .Values.namespace.labels.admissionWebhooks }}
+  annotations:
+    linkerd.io/inject: {{ .Values.namespace.annotations.linkerdInject }}
