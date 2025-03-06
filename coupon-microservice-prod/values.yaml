@@ -34,7 +34,7 @@ deployment:
 
   image:
     name: "guruyulu/elk-app"
-    tag: "latest"
+    tag: "v1"
     pullPolicy: "IfNotPresent"
   registry: "docker.io"
 
