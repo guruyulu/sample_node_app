@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: infra-backend
+  namespace: yulucd
+spec:
+  destination:
+    name: ''
+    namespace: infra-apps3
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: coupon-microservice-prod
+    repoURL: 'https://github.com/guruyulu/sample_node_app.git'
+    targetRevision: main
+    helm:
+      valueFiles:
+        - values.yaml
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: false
+    syncOptions:
+      - CreateNamespace=true

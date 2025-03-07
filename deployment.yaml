@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: express-app
-          image: guruyulu/elk-app:latest
+          image: guruyulu/elk-app:v1
           ports:
             - containerPort: 3002
           # env:

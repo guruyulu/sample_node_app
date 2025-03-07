@@ -98,8 +98,12 @@ app.use(express.json());
 // });
 
 // Basic test endpoint
-app.get('/', async (req, res) => {
+app.get('/1', async (req, res) => {
   res.send("hello world");
+});
+
+app.get('/2', async (req, res) => {
+  res.send("hello world from route 2");
 });
 
 app.get('/health', async (req, res) => {
