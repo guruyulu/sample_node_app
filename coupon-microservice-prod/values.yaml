@@ -5,4 +5,4 @@ namespace:
   annotations:
     linkerdInject: "disabled"
 
-appNamespace: "infra-apps3"
+appNamespace: "infra-apps4"
