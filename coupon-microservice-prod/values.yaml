@@ -1,8 +1,8 @@
 namespace:
-  name: "infra-apps2"
+  name: "infra-apps7"
   labels:
     admissionWebhooks: "disabled"
   annotations:
     linkerdInject: "disabled"
 
-appNamespace: "infra-apps2"
+appNamespace: "infra-apps7"

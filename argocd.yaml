@@ -6,7 +6,7 @@ metadata:
 spec:
   destination:
     name: ''
-    namespace: infra-apps2
+    namespace: infra-apps7
     server: 'https://kubernetes.default.svc'
   source:
     path: coupon-microservice-prod
