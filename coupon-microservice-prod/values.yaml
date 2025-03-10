@@ -1,5 +1,5 @@
 namespace:
-  name: "infra-apps4"
+  name: "infra-apps1"
   labels:
     admissionWebhooks: "disabled"
   annotations:
